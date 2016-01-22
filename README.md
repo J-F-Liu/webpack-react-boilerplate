@@ -3,7 +3,7 @@ It took me several days to learn and assemble these pieces, so this boilerplate 
 
 # Usage
 
-1. Install Node.js
+1. Install Node.js and Git
 
 2. Download the repository
    ```
@@ -22,3 +22,5 @@ It took me several days to learn and assemble these pieces, so this boilerplate 
 5. Build website for production enviroment
 
    `npm run build`
+
+View [online demo](http://j-f-liu.github.io/webpack-react-boilerplate/).
