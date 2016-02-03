@@ -1,19 +1,30 @@
 import React, {Component} from 'react';
 import Piece from './Piece';
+import Logo from './Logo';
 
 export default class App extends Component {
   static pieces = [
-    {name: "Webpack", link: "http://webpack.github.io/"},
-    {name: "React", link: "http://facebook.github.io/react/"},
-    {name: "Babel", link: "http://babeljs.io/"},
-    {name: "Sass", link: "http://sass-lang.com/"},
+    {name: "Webpack", link: "http://webpack.github.io/", logo: "Webpack.gif"},
+    {name: "React", link: "http://facebook.github.io/react/", logo: "React.svg"},
+    {name: "Babel", link: "http://babeljs.io/", logo: "Babel.png"},
+    {name: "Sass", link: "http://sass-lang.com/", logo: "Sass.svg"},
   ];
+
+  loadLogo = (link, image) => {
+    var imageUrl = require('../images/'+image);
+    this.refs.logo.setState({link: link, image: imageUrl});
+  };
 
   render() {
     return (
-      <h1>
-        {App.pieces.map((piece,i) => <Piece key={i} {...piece} />).insertSeparator("+")}
-      </h1>
+      <div>
+        <h1>
+          {App.pieces.map((piece,i) => <Piece key={i} {...piece} clicked={this.loadLogo} />).insertSeparator("+")}
+        </h1>
+        <p>
+          <Logo ref="logo" />
+        </p>
+      </div>
     );
   }
 }

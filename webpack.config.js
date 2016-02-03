@@ -25,6 +25,9 @@ const common = {
         test: /\.jsx?$/,
         loaders: ['babel'],
         include: PATHS.app
+      },
+      { test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: ['file?name=img/[hash].[ext]', 'img?-minimize']
       }
     ]
   },
@@ -76,7 +79,7 @@ const different = function(build) {
         },
         output: {
           path: PATHS.build,
-          filename: '[name].[chunkhash].js',
+          filename: 'js/[name].[chunkhash].js',
           chunkFilename: '[chunkhash].js'
         },
         module: {
