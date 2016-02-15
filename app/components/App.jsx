@@ -1,6 +1,20 @@
 import React, {Component} from 'react';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import Piece from './Piece';
 import Logo from './Logo';
+
+class Layout extends Component {
+  render() {
+    return <div>
+      <h1>
+        {App.pieces.map((piece,i) => <Piece key={i} {...piece} />).insertSeparator("+")}
+      </h1>
+      <p>
+        {this.props.children}
+      </p>
+    </div>;
+  }
+}
 
 export default class App extends Component {
   static pieces = [
@@ -10,21 +24,12 @@ export default class App extends Component {
     {name: "Sass", link: "http://sass-lang.com/", logo: "Sass.svg"},
   ];
 
-  loadLogo = (link, image) => {
-    var imageUrl = require('../images/'+image);
-    this.refs.logo.setState({link: link, image: imageUrl});
-  };
-
   render() {
     return (
-      <div>
-        <h1>
-          {App.pieces.map((piece,i) => <Piece key={i} {...piece} clicked={this.loadLogo} />).insertSeparator("+")}
-        </h1>
-        <p>
-          <Logo ref="logo" />
-        </p>
-      </div>
-    );
+    <Router history={browserHistory}>
+      <Route path="/" component={Layout}>
+        <Route path="/:name" component={Logo} />
+      </Route>
+    </Router>);
   }
 }
