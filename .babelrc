@@ -2,7 +2,7 @@
   "presets": [
     "es2015",
     "react",
-    "survivejs-kanban"
+    "stage-1"
   ],
   "env": {
     "development": {
