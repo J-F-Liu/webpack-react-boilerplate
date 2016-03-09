@@ -11,15 +11,15 @@ export default class Logo extends Component {
     this.setState({link: piece.link, image: imageUrl});
   }
 
-  componentDidMount() {
-    this.loadLogo(this.props.params.name);
-  }
-
-  componentDidUpdate(prevProps) {
-    let name = this.props.params.name;
-    if (name !== prevProps.params.name) {
+  componentWillReceiveProps(nextProps) {
+    let name = nextProps.params.name;
+    if (name !== this.props.params.name) {
       this.loadLogo(name);
     }
+  }
+
+  componentDidMount() {
+    this.loadLogo(this.props.params.name);
   }
 
   render() {
