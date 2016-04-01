@@ -20,12 +20,13 @@ export default class Piece extends Component {
 
   handleClick = () => {
     this.props.clicked(this.props.link, this.props.logo);
+    return false;
   };
 
   render() {
-    if (this.state.active){
+    if (this.state.active) {
       return <a href="javascript:void(0)" onMouseOut={this.handleMouseOut} onClick={this.handleClick}>{this.props.name}</a>;
-    }else{
+    } else {
       return <span onMouseOver={this.handleMouseOver}>{this.props.name}</span>;
     }
   }
