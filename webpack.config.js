@@ -1,14 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const Clean = require('clean-webpack-plugin');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const packages = require('./package.json');
 
-const TARGET = process.env.npm_lifecycle_event;
-const BUILD = process.env.NODE_ENV || (TARGET === 'build' ? 'production' : 'development');
-process.env.BABEL_ENV = BUILD;
+const BUILD = process.env.BABEL_ENV = process.env.NODE_ENV;
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
@@ -92,12 +89,6 @@ const different = function(build) {
           ]
         },
         plugins: [
-          new Clean([PATHS.build]),
-          new webpack.DefinePlugin({
-            "process.env": {
-              NODE_ENV: JSON.stringify("production")
-            }
-          }),
           new ExtractTextPlugin("styles.[chunkhash].css"),
           new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest']
