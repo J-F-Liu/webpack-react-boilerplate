@@ -1,25 +1,30 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import App from './App';
 
 export default class Logo extends Component {
+  static propTypes = {
+    params: PropTypes.shape({
+      name: PropTypes.string
+    })
+  };
 
-  state = {link: "", image: ""};
+  state = {link: '', image: ''};
 
-  loadLogo(name) {
-    let piece = App.pieces.find(p => p.name == name);
-    let imageUrl = require('../images/'+piece.logo);
-    this.setState({link: piece.link, image: imageUrl});
+  componentDidMount() {
+    this.loadLogo(this.props.params.name);
   }
 
   componentWillReceiveProps(nextProps) {
-    let name = nextProps.params.name;
+    const name = nextProps.params.name;
     if (name !== this.props.params.name) {
       this.loadLogo(name);
     }
   }
 
-  componentDidMount() {
-    this.loadLogo(this.props.params.name);
+  loadLogo(name) {
+    const piece = App.pieces.find(p => p.name === name);
+    const imageUrl = require(`../images/${piece.logo}`);
+    this.setState({link: piece.link, image: imageUrl});
   }
 
   render() {

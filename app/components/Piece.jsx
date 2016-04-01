@@ -19,9 +19,9 @@ export default class Piece extends Component {
   };
 
   render() {
-    if (this.state.active){
-      return <Link to={this.props.name} onMouseOut={this.handleMouseOut} activeStyle={{ color: 'red' }}>{this.props.name}</Link>;
-    }else{
+    if (this.state.active) {
+      return <Link to={this.props.name} onMouseOut={this.handleMouseOut} activeStyle={{color: 'red'}}>{this.props.name}</Link>;
+    } else {
       return <span onMouseOver={this.handleMouseOver}>{this.props.name}</span>;
     }
   }
