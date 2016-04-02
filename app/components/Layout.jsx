@@ -1,21 +1,20 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 import Piece from './Piece';
 import App from './App';
 
-export default class Layout extends Component {
-  static propTypes = {
-    children: PropTypes.node
-  };
-
-  render() {
-    return (
+export default function Layout(props) {
+  return (
     <div>
       <h1>
         {App.pieces.map((piece, i) => <Piece key={i} {...piece} />).insertSeparator('+')}
       </h1>
       <p>
-        {this.props.children}
+        {props.children}
       </p>
-    </div>);
-  }
+    </div>
+  );
 }
+
+Layout.propTypes = {
+  children: PropTypes.node
+};
