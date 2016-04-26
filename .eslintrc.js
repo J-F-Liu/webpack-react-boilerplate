@@ -11,6 +11,8 @@ module.exports = {
     "no-script-url": "warn",
     "no-use-before-define": "warn",
     "object-curly-spacing": ["error", "never"],
+    "global-require": "warn",
+    "jsx-a11y/img-has-alt": "warn",
     "react/prefer-stateless-function": "warn"
   },
   "plugins": [

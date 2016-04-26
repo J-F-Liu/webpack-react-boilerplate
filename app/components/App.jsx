@@ -13,10 +13,11 @@ export default class App extends Component {
 
   render() {
     return (
-    <Router history={browserHistory}>
-      <Route path="/" component={Layout}>
-        <Route path="/:name" component={Logo} />
-      </Route>
-    </Router>);
+      <Router history={browserHistory}>
+        <Route path="/" component={Layout}>
+          <Route path="/:name" component={Logo} />
+        </Route>
+      </Router>
+    );
   }
 }
