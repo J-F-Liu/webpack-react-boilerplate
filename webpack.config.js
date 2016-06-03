@@ -9,7 +9,7 @@ const BUILD = process.env.BABEL_ENV = process.env.NODE_ENV;
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build')
+  build: path.join(__dirname, 'build/client')
 };
 
 const common = {
@@ -91,7 +91,12 @@ const different = function(build) {
           ]
         },
         plugins: [
-          new ExtractTextPlugin("styles.[chunkhash].css"),
+          new webpack.DefinePlugin({
+            "process.env": {
+              NODE_ENV: JSON.stringify("production")
+            }
+          }),
+          new ExtractTextPlugin("css/[chunkhash].css"),
           new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest']
           }),
