@@ -3,12 +3,15 @@ require("babel-polyfill");
 
 import Koa from 'koa';
 import serve from 'koa-static';
+import compress from 'koa-compress';
 import commandLineArgs from 'command-line-args';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 
 import fs from 'fs';
+import pem from 'pem';
+import spdy from 'spdy';
 import 'sugar';
 import routes from '../app/routes';
 
@@ -29,6 +32,11 @@ app.use(async (ctx, next) => {
     ctx.status = err.status || 500;
   }
 });
+
+app.use(compress({
+  threshold: 2048,
+  flush: require('zlib').Z_SYNC_FLUSH
+}))
 
 app.use(async (ctx, next) => {
   let matched = true;
@@ -53,9 +61,27 @@ app.use(async (ctx, next) => {
 app.use(serve('build/client'));
 
 const optionDefinitions = [
-  { name: 'port', alias: 'p', type: Number, defaultValue: 3000 }
+  { name: 'port', alias: 'p', type: Number, defaultValue: 3000 },
+  { name: 'https', alias: 's', type: Boolean, defaultValue: false },
 ];
 const options = commandLineArgs(optionDefinitions);
 
-app.listen(options.port);
-console.log(`Listening on http://localhost:${options.port}`);
+if (!options.https) {
+  app.listen(options.port);
+  console.log(`Listening on http://localhost:${options.port}`);
+} else {
+  pem.createCertificate({
+    days: 1,
+    selfSigned: true
+  }, function(err, keys){
+    const credentials = {
+      key: keys.serviceKey,
+      cert: keys.certificate
+    };
+
+    const server = spdy.createServer(credentials, app.callback());
+    server.listen(options.port, function() {
+      console.log(`Listening on https://localhost:${options.port}`);
+    });
+  });
+}
