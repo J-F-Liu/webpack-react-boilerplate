@@ -12,8 +12,10 @@ import { match, RouterContext } from 'react-router';
 import fs from 'fs';
 import pem from 'pem';
 import spdy from 'spdy';
-import 'sugar';
+import Sugar from 'sugar';
 import routes from '../app/routes';
+
+Sugar.extend();
 
 function generatePage(content) {
   let html = fs.readFileSync('build/client/index.html', 'utf8');

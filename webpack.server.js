@@ -21,7 +21,7 @@ const common = {
   target: 'node',
   externals: fs.readdirSync('node_modules'),
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   module: {
     loaders: [
@@ -53,7 +53,10 @@ const different = function(build) {
           loaders: [
             {
               test: /\.sass$/,
-              loader: ExtractTextPlugin.extract('style', ['css', 'sass?indentedSyntax=true']),
+              loader: ExtractTextPlugin.extract({
+                notExtractLoader: 'style',
+                loader: ['css', 'sass?indentedSyntax=true']
+              }),
               include: PATHS.app
             }
           ]
