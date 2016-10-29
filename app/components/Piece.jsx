@@ -4,8 +4,6 @@ import {Link} from 'react-router';
 export default class Piece extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    logo: PropTypes.string.isRequired,
   };
 
   state = {active: false};
