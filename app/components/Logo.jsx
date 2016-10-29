@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, {PropTypes} from 'react';
 
-export default class Logo extends Component {
-
-  state = {link: '', image: ''};
-
-  render() {
-    return <a href={this.state.link}><img src={this.state.image} /></a>;
-  }
+export default function Logo(props) {
+  const {name, link, image} = props;
+  return <a href={link}><img src={image} alt={name} /></a>;
 }
+
+Logo.propTypes = {
+  name: PropTypes.string,
+  link: PropTypes.string,
+  image: PropTypes.string,
+};

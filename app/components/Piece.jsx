@@ -5,7 +5,7 @@ export default class Piece extends Component {
     name: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
     logo: PropTypes.string.isRequired,
-    clicked: PropTypes.func,
+    onClick: PropTypes.func,
   };
 
   state = {active: false};
@@ -19,7 +19,7 @@ export default class Piece extends Component {
   };
 
   handleClick = () => {
-    this.props.clicked(this.props.link, this.props.logo);
+    this.props.onClick(this.props.name, this.props.link, this.props.logo);
   };
 
   render() {
