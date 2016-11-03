@@ -28,3 +28,17 @@ It took me several days to learn and assemble these pieces, so this boilerplate 
 
 View [online demo](http://j-f-liu.github.io/webpack-react-boilerplate/).<br>
 View [online demo with react-router](https://webpack-react-boiler.firebaseapp.com/).
+
+# Trouble shooting
+
+```
+ERROR in ./~/css-loader!./~/sass-loader?indentedSyntax=true!./app/styles/site.sass
+Module build failed: Error: ENOENT: no such file or directory, scandir
+```
+Run `npm rebuild node-sass`.
+
+When using Microsoft Windows, install [Python 2.7](https://www.python.org/downloads/windows/) and [Visual C++ Build Tools](http://landinghub.visualstudio.com/visual-cpp-build-tools), then run
+```
+npm install node-sass --msvs_version=2015
+npm rebuild node-sass
+```
