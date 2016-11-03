@@ -16,7 +16,6 @@ const PATHS = {
 const common = {
   output: {
     path: PATHS.dist,
-    publicPath: './',
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -47,6 +46,7 @@ const different = function(build) {
       return {
         entry: PATHS.app,
         output: {
+          publicPath: '/',
           filename: 'bundle.js'
         },
         module: {
@@ -79,6 +79,7 @@ const different = function(build) {
           vendor: Object.keys(packages.dependencies)
         },
         output: {
+          publicPath: './',
           filename: 'js/[name].[chunkhash].js',
           chunkFilename: '[chunkhash].js'
         },
