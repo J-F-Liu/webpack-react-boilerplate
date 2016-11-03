@@ -10,12 +10,12 @@ const BUILD = process.env.BABEL_ENV = process.env.NODE_ENV;
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build/client')
+  dist: path.join(__dirname, 'dist/client'),
 };
 
 const common = {
   output: {
-    path: PATHS.build,
+    path: PATHS.dist,
     publicPath: '/'
   },
   resolve: {

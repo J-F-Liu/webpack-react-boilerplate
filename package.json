@@ -4,12 +4,12 @@
   "description": "webpack-react-boilerplate",
   "main": "webpack.config.js",
   "scripts": {
-    "prebuild": "rimraf build/client",
+    "prebuild": "rimraf dist/client",
     "build": "cross-env NODE_ENV=production webpack",
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "lint": "eslint --ext .js,.jsx app",
     "build:server": "cross-env NODE_ENV=production webpack --config webpack.server.js",
-    "serve": "npm run build:server && node build/server/entry.js"
+    "serve": "npm run build:server && node dist/server/entry.js"
   },
   "keywords": [],
   "author": "Junfeng Liu",

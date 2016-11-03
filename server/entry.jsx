@@ -1,12 +1,12 @@
-require("babel-register");
-require("babel-polyfill");
+import 'babel-register';
+import 'babel-polyfill';
 
 import Koa from 'koa';
 import serve from 'koa-static';
 import compress from 'koa-compress';
 import commandLineArgs from 'command-line-args';
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+import ReactDOMServer from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 
 import fs from 'fs';
@@ -18,7 +18,7 @@ import routes from '../app/routes';
 Sugar.extend();
 
 function generatePage(content) {
-  let html = fs.readFileSync('build/client/index.html', 'utf8');
+  let html = fs.readFileSync('dist/client/index.html', 'utf8');
   let mountPoint = '<div id="app">';
   let insertPoint = html.indexOf(mountPoint) + mountPoint.length;
   return html.insert(content, insertPoint);
@@ -50,7 +50,7 @@ app.use(async (ctx, next) => {
       ctx.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
       ctx.status = 200;
-      ctx.body = generatePage(renderToString(<RouterContext {...renderProps} />));
+      ctx.body = generatePage(ReactDOMServer.renderToString(<RouterContext {...renderProps} />));
     } else {
       matched = false;
     }
@@ -60,7 +60,7 @@ app.use(async (ctx, next) => {
   }
 });
 
-app.use(serve('build/client'));
+app.use(serve('dist/client'));
 
 const optionDefinitions = [
   { name: 'port', alias: 'p', type: Number, defaultValue: 3000 },
