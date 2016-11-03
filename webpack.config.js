@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const gitRevision = require('git-revision');
 const packages = require('./package.json');
 
 const BUILD = process.env.BABEL_ENV = process.env.NODE_ENV;
@@ -94,6 +95,12 @@ const different = function(build) {
           ]
         },
         plugins: [
+          new webpack.DefinePlugin({
+            "process.env": {
+              VERSION: JSON.stringify(gitRevision("short")),
+              NODE_ENV: JSON.stringify("production"),
+            }
+          }),
           new ExtractTextPlugin("styles.[chunkhash].css"),
           new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest']
