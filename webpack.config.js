@@ -10,13 +10,13 @@ const BUILD = process.env.BABEL_ENV = process.env.NODE_ENV;
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build')
+  dist: path.join(__dirname, 'dist'),
 };
 
 const common = {
   output: {
-    path: PATHS.build,
-    publicPath: '/'
+    path: PATHS.dist,
+    publicPath: './',
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -101,7 +101,7 @@ const different = function(build) {
               NODE_ENV: JSON.stringify("production"),
             }
           }),
-          new ExtractTextPlugin("styles.[chunkhash].css"),
+          new ExtractTextPlugin("css/[name].[chunkhash].css"),
           new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest']
           }),

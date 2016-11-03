@@ -4,7 +4,7 @@
   "description": "webpack-react-boilerplate",
   "main": "webpack.config.js",
   "scripts": {
-    "prebuild": "rimraf build",
+    "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production webpack",
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "lint": "eslint --ext .js,.jsx app"
