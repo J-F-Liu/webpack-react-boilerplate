@@ -30,7 +30,11 @@ View [online demo](http://j-f-liu.github.io/webpack-react-boilerplate/).<br>
 View [online demo with react-router](https://webpack-react-boiler.firebaseapp.com/).
 
 # Trouble shooting
-
+```
+ERROR in ./~/css-loader!./~/sass-loader?indentedSyntax=true!./app/styles/site.sass
+Module build failed: Error: Node Sass does not yet support your current environment: Linux 64-bit with Unsupported runtime (51)
+```
+or
 ```
 ERROR in ./~/css-loader!./~/sass-loader?indentedSyntax=true!./app/styles/site.sass
 Module build failed: Error: ENOENT: no such file or directory, scandir
