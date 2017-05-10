@@ -24,11 +24,11 @@ const common = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
+        loaders: ['babel-loader'],
         include: PATHS.app
       },
       { test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: ['file?name=img/[hash].[ext]', 'img?-minimize']
+        loaders: ['file-loader?name=img/[hash].[ext]', 'img-loader?-minimize']
       }
     ]
   },
@@ -53,7 +53,7 @@ const different = function(build) {
           loaders: [
             {
               test: /\.sass$/,
-              loaders: ['style', 'css', 'sass?indentedSyntax=true'],
+              loaders: ['style-loader', 'css-loader', 'sass-loader?indentedSyntax=true'],
               include: PATHS.app
             }
           ]
@@ -63,7 +63,6 @@ const different = function(build) {
           historyApiFallback: true,
           hot: true,
           inline: true,
-          progress: true,
           stats: 'errors-only',
           host: process.env.HOST,
           port: process.env.PORT
@@ -89,7 +88,7 @@ const different = function(build) {
               test: /\.sass$/,
               loader: ExtractTextPlugin.extract({
                 notExtractLoader: 'style',
-                loader: ['css', 'sass?indentedSyntax=true']
+                loader: ['css-loader', 'sass-loader?indentedSyntax=true']
               }),
               include: PATHS.app
             }
