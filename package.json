@@ -1,6 +1,6 @@
 {
   "name": "webpack-react-boilerplate",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "webpack-react-boilerplate",
   "main": "webpack.config.js",
   "scripts": {

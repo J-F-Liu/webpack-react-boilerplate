@@ -21,14 +21,15 @@ const common = {
     extensions: ['.js', '.jsx']
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel-loader'],
+        use: ['babel-loader'],
         include: PATHS.app
       },
-      { test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: ['file-loader?name=img/[hash].[ext]', 'img-loader?-minimize']
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: ['file-loader?name=img/[hash].[ext]', 'img-loader?-minimize']
       }
     ]
   },
@@ -50,10 +51,10 @@ const different = function(build) {
           filename: 'bundle.js'
         },
         module: {
-          loaders: [
+          rules: [
             {
               test: /\.sass$/,
-              loaders: ['style-loader', 'css-loader', 'sass-loader?indentedSyntax=true'],
+              use: ['style-loader', 'css-loader', 'sass-loader?indentedSyntax=true'],
               include: PATHS.app
             }
           ]
@@ -83,12 +84,12 @@ const different = function(build) {
           chunkFilename: '[chunkhash].js'
         },
         module: {
-          loaders: [
+          rules: [
             {
               test: /\.sass$/,
-              loader: ExtractTextPlugin.extract({
-                notExtractLoader: 'style',
-                loader: ['css-loader', 'sass-loader?indentedSyntax=true']
+              use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: ['css-loader', 'sass-loader?indentedSyntax=true']
               }),
               include: PATHS.app
             }
