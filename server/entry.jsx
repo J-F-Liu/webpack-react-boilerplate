@@ -12,16 +12,14 @@ import { match, RouterContext } from 'react-router';
 import fs from 'fs';
 import pem from 'pem';
 import spdy from 'spdy';
-import Sugar from 'sugar';
+import {insertString} from '../app/lib';
 import routes from '../app/routes';
-
-Sugar.extend();
 
 function generatePage(content) {
   let html = fs.readFileSync('dist/client/index.html', 'utf8');
   let mountPoint = '<div id="app">';
   let insertPoint = html.indexOf(mountPoint) + mountPoint.length;
-  return html.insert(content, insertPoint);
+  return insertString(html, insertPoint, content);
 }
 
 const app = new Koa();

@@ -31,3 +31,13 @@ if (!Array.prototype.find) {
     return undefined;
   };
 }
+
+/**
+ * @param {string} string
+ * @param {number} index
+ * @param {string} substring
+ * @returns {string} New string
+ */
+export function insertString(string, index, substring) {
+  return [string.slice(0, index), substring, string.slice(index)].join("");
+}
