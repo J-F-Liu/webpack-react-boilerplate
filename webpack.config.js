@@ -22,14 +22,15 @@ const common = {
     extensions: ['.js', '.jsx']
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
+        use: ['babel-loader'],
         include: PATHS.app
       },
-      { test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: ['file?name=img/[hash].[ext]', 'img?-minimize']
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: ['file-loader?name=img/[hash].[ext]', 'img-loader?-minimize']
       }
     ]
   },
@@ -50,10 +51,10 @@ const different = function(build) {
           filename: 'bundle.js'
         },
         module: {
-          loaders: [
+          rules: [
             {
               test: /\.sass$/,
-              loaders: ['style', 'css', 'sass?indentedSyntax=true'],
+              use: ['style-loader', 'css-loader', 'sass-loader?indentedSyntax=true'],
               include: PATHS.app
             }
           ]
@@ -63,10 +64,9 @@ const different = function(build) {
           historyApiFallback: true,
           hot: true,
           inline: true,
-          progress: true,
           stats: 'errors-only',
           host: process.env.HOST,
-          port: process.env.PORT
+          port: parseInt(process.env.PORT)
         },
         plugins: [
           new webpack.HotModuleReplacementPlugin()
@@ -83,12 +83,12 @@ const different = function(build) {
           chunkFilename: '[chunkhash].js'
         },
         module: {
-          loaders: [
+          rules: [
             {
               test: /\.sass$/,
-              loader: ExtractTextPlugin.extract({
-                notExtractLoader: 'style',
-                loader: ['css', 'sass?indentedSyntax=true']
+              use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: ['css-loader', 'sass-loader?indentedSyntax=true']
               }),
               include: PATHS.app
             }
@@ -101,7 +101,7 @@ const different = function(build) {
               NODE_ENV: JSON.stringify("production"),
             }
           }),
-          new ExtractTextPlugin("css/[chunkhash].css"),
+          new ExtractTextPlugin("css/[name].[chunkhash].css"),
           new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest']
           }),

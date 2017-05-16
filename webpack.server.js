@@ -24,14 +24,15 @@ const common = {
     extensions: ['.js', '.jsx']
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
+        use: ['babel-loader'],
         include: [PATHS.app, PATHS.server]
       },
-      { test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: ['file?name=img/[hash].[ext]', 'img?-minimize']
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: ['file-loader?name=img/[hash].[ext]', 'img-loader?-minimize']
       }
     ]
   }
@@ -50,12 +51,12 @@ const different = function(build) {
           libraryTarget: 'commonjs2'
         },
         module: {
-          loaders: [
+          rules: [
             {
               test: /\.sass$/,
-              loader: ExtractTextPlugin.extract({
-                notExtractLoader: 'style',
-                loader: ['css', 'sass?indentedSyntax=true']
+              use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: ['css-loader', 'sass-loader?indentedSyntax=true']
               }),
               include: PATHS.app
             }
