@@ -1,6 +1,8 @@
 # Webpack+React+Babel+Sass
 It took me several days to learn and assemble these pieces, so this boilerplate can save others time.
 
+<span style="color:read">DEPRECATED:</span> Use [parcel-react-boilerplate](https://github.com/J-F-Liu/parcel-react-boilerplate.git) instead.
+
 # Usage
 
 1. Install Node.js and Git
